@@ -10,6 +10,7 @@ console.log(`Hello, ${name}!`);
 console.log('What is the result of the expression?');
 
 let count = 0;
+let stop = false;
 while (count < 3) {
   const oprand = operation[Math.floor(Math.random() * 3)];
   const a = Math.floor(Math.random() * 100);
@@ -24,6 +25,7 @@ while (count < 3) {
         count += 1;
       } else {
         console.log(`'${answer}' is wrong answer ;(. Correct answer was '${a + b}'.`);
+        stop = true;
       }
       break;
     case '-':
@@ -32,6 +34,7 @@ while (count < 3) {
         count += 1;
       } else {
         console.log(`'${answer}' is wrong answer ;(. Correct answer was '${a - b}'.`);
+        stop = true;
       }
       break;
     case '*':
@@ -40,11 +43,19 @@ while (count < 3) {
         count += 1;
       } else {
         console.log(`'${answer}' is wrong answer ;(. Correct answer was '${a * b}'.`);
+        stop = true;
       }
       break;
     default:
       break;
   }
+  if (stop) {
+    break;
+  }
 }
 
-console.log(`Congratulations, ${name}!`);
+if (count !== 3) {
+  console.log(`Let's try again, ${name}!`);
+} else {
+  console.log(`Congratulations, ${name}!`);
+}

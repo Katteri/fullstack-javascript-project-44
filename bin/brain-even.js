@@ -24,7 +24,12 @@ while (count < 3) {
     count += 1;
   } else {
     console.log(`'${answer}' is wrong answer ;(. Correct answer was '${right}'.`);
+    break;
   }
 }
 
-console.log(`Congratulations, ${name}!`);
+if (count !== 3) {
+  console.log(`Let's try again, ${name}!`);
+} else {
+  console.log(`Congratulations, ${name}!`);
+}
