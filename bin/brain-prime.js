@@ -18,7 +18,7 @@ console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
 let count = 0;
 while (count < 3) {
   const number1 = Math.floor(Math.random() * 100);
-  const right = prime(70) ? 'yes' : 'no';
+  const right = prime(number1) ? 'yes' : 'no';
 
   console.log(`Question: ${number1}`);
   const answer = readlineSync.question('Your answer: ');
