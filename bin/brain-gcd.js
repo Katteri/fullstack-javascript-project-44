@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
+import { isCorrect, end } from '../src/is-correct.js';
 
 function gcd(x, y) {
   if (y > x) { return gcd(y, x); }
@@ -12,8 +13,8 @@ const name = readlineSync.question('May I have your name? ');
 console.log(`Hello, ${name}!`);
 console.log('Find the greatest common divisor of given numbers.');
 
-let count = 0;
-while (count < 3) {
+let happyEnd = true;
+for (let count = 0; count < 3; count += 1) {
   const number1 = Math.floor(Math.random() * 100);
   const number2 = Math.floor(Math.random() * 100);
   const right = gcd(number1, number2);
@@ -21,17 +22,10 @@ while (count < 3) {
   console.log(`Question: ${number1} ${number2}`);
   const answer = readlineSync.question('Your answer: ');
 
-  if (right === Number(answer)) {
-    console.log('Correct!');
-    count += 1;
-  } else {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${right}'.`);
+  if (!isCorrect(right, Number(answer))) {
+    happyEnd = false;
     break;
   }
 }
 
-if (count !== 3) {
-  console.log(`Let's try again, ${name}!`);
-} else {
-  console.log(`Congratulations, ${name}!`);
-}
+end(happyEnd, name);

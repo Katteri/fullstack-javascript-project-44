@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
+import { isCorrect, end } from '../src/is-correct.js';
 
 function progression(num1, d) {
   const arr = [];
@@ -15,8 +16,8 @@ const name = readlineSync.question('May I have your name? ');
 console.log(`Hello, ${name}!`);
 console.log('What number is missing in the progression?');
 
-let count = 0;
-while (count < 3) {
+let happyEnd = true;
+for (let count = 0; count < 3; count += 1) {
   const number1 = Math.floor(Math.random() * 100);
   const d = Math.floor(Math.random() * 100);
   const question = Math.floor(Math.random() * 9);
@@ -27,17 +28,10 @@ while (count < 3) {
   console.log(`Question: ${arr.join(' ')}`);
   const answer = readlineSync.question('Your answer: ');
 
-  if (right === Number(answer)) {
-    console.log('Correct!');
-    count += 1;
-  } else {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${right}'.`);
+  if (!isCorrect(right, Number(answer))) {
+    happyEnd = false;
     break;
   }
 }
 
-if (count !== 3) {
-  console.log(`Let's try again, ${name}!`);
-} else {
-  console.log(`Congratulations, ${name}!`);
-}
+end(happyEnd, name);
